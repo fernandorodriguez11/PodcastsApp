@@ -51,33 +51,6 @@ class AdminController extends AbstractController
     }
 
      /**
-     * @Route("/editar2/{id_podcast}", name="editar2_todo")
-     */
-    public function editar2($id_podcast, Request $request): Response
-    {   
-        $user = $this->getUser();
-        $podcasts = new Podcasts();
-
-        if(!$user){
-            return $this->redirectToRoute('login');
-        }else{
-
-
-
-            $em = $this->getDoctrine()->getManager(); 
-            $podcasts = $em->getRepository(Podcasts::class)->podcastUsuario($id_podcast);
-            
-            return $this->render('admin/editarUP.html.twig', [
-                'controller_name' => 'Editar Usuario y Podcast',
-                'usuarios_podcast' => $podcasts,
-                
-            ]);
-        }
-        
-    }
-
-
-     /**
      * @Route("/editar/{id}/{idp}", name="editar_todo")
      */
     public function editar(User $usuario, $idp , EntityManagerInterface $em, Request $request): Response
