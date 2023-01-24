@@ -1,0 +1,99 @@
+span{
+    font-size: 14px;
+    color: grey;
+  }
+
+  html,
+body,
+.view {
+height: 100%;
+}
+
+#mobile-box {
+width: 360px;
+}
+
+.card {
+-webkit-border-radius: 10px;
+border-radius: 10px;
+}
+
+.card .view {
+-webkit-border-top-left-radius: 10px;
+border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+border-top-right-radius: 10px;
+}
+
+.card h5 a {
+color: #0d47a1;
+}
+
+.card h5 a:hover {
+color: #072f6b;
+}
+
+#pButton {
+float: left;
+}
+
+#timeline {
+width: 90%;
+height: 2px;
+margin-top: 20px;
+margin-left: 10px;
+float: left;
+-webkit-border-radius: 15px;
+border-radius: 15px;
+background: rgba(0, 0, 0, 0.3);
+}
+
+#pButton {
+margin-top: 12px;
+cursor: pointer;
+}
+
+#playhead {
+width: 8px;
+height: 8px;
+-webkit-border-radius: 50%;
+border-radius: 50%;
+margin-top: -3px;
+background: black;
+cursor: pointer;
+}
+  /**audio */
+
+  .title {
+  
+      margin-bottom: 50px;
+      text-transform: uppercase;
+  }
+
+  .card-block {
+      font-size: 1em;
+      position: relative;
+      margin: 0;
+      padding: 1em;
+      border: none;
+      border-top: 1px solid rgba(34, 36, 38, .1);
+      box-shadow: none;
+      
+  }
+  .card {
+      font-size: 1em;
+      overflow: hidden;
+      padding: 5;
+      border: none;
+      border-radius: .28571429rem;
+      box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+      margin-top:20px;
+  }
+  
+
+  .btn {
+  margin-top: auto;
+  }
+
+  .example-wrapper { margin: 1em auto; max-width: 1200px; width: 95%; font: 18px/1.5 sans-serif; margin-top: 85px; box-sizing: border-box}
+  .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }

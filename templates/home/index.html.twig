@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block stylesheets %} 
+  {{ parent() }}
+  <link rel="stylesheet" href="{{asset('css/home/home.css')}}" />
+{% endblock %}
+{% block javascripts %} {{ parent() }} {% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+<div class="example-wrapper">
+
+    {% if podcasts is empty %}
+
+      <div class="title h1 text-center">  Pulsa <a class="mx-2" href="{{ path('crear_podcast', {id: usuario.id}) }}">Aquí</a> para crear Tu podcast</div>
+
+    {% else %}
+
+      <div class="title h1 text-center"> Tus Podcasts {{usuario.nombre}} </div>
+        <div class="container d-flex justify-content-center my-5 mb-5">
+          <div class="contenido">
+            {% for podcast in podcasts %}
+                <!-- Content -->
+            
+                <div id="{{podcast.id}}" >
+                  <!-- Card -->
+                  <a href="{{ path('ver_podcast', {id: podcast.id, idu: usuario.id}) }}">
+                    <div class="card ">
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img class="card-img-top" src="{{asset('uploads/images/'~podcast.imagen)}}"
+                          alt="Imagen del Podcast {{podcast.titulo}}">
+                      </div>
+
+                      <div class="card-body text-center">
+
+                        <h5 class="h5 font-weight-bold">{{podcast.titulo}}</h5>
+
+                        <audio id="music"  controls>
+                          <source src="{{asset('uploads/audios/'~podcast.audio)}}" type="audio/mpeg" />
+                        </audio>
+
+                      </div>
+                    </div>
+                  </a>
+                  <!-- Card -->
+                </div>
+                
+            {% endfor %}
+          </div>
+        </div>
+    {% endif %}
+
+
+</div>
+{% endblock %}

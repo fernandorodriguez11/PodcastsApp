@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Podcast{% endblock %}
+
+{% block stylesheets %} 
+  {{ parent() }}
+  <link rel="stylesheet" href="{{asset('css/podcast/crear.css')}}" />
+{% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}
+
+{% block body %}
+
+    {{parent()}}
+
+    <div class="formulario_crear">
+        {{ form_start(formulario, {attr: {autocomplete: "off"}}) }}
+
+            <div class="mb-3">
+                {{ form_row(formulario.titulo, {attr:{'class': 'form-control', autocomplete: 'off', placeholder: 'Historias Para No Dormir'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(formulario.descripcion, {attr:{'class': 'form-control', autocomplete: 'off', placeholder: 'Descripción de unos 3000 caracteres'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(formulario.imagen) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(formulario.audio) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(formulario.crear) }}
+            </div>
+
+        {{ form_end(formulario)}}
+    </div>
+
+{% endblock %}

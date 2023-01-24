@@ -1,0 +1,48 @@
+.card .view {
+-webkit-border-top-left-radius: 10px;
+border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+border-top-right-radius: 10px;
+}
+  
+/**audio */
+
+.title {
+    margin-top: 85px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.contenido{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+    
+}
+.card {
+    
+    font-size: 1em;
+    overflow: hidden;
+    padding: 5;
+    border: none;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    margin-top:20px;
+    margin-right: 25px;
+    margin-left: 25px;
+    display: grid;
+}
+
+.btn {
+margin-top: auto;
+}

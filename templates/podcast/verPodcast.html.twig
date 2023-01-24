@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PodcastController!{% endblock %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}
+
+{% block body %}
+
+{{parent()}}
+
+<section class="text-center" style="margin-top: 45px">
+    <div class="card-body py-5 px-md-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-5" >Datos Podcast</h2>
+                {{ form_start(formulario, {attr: {autocomplete: "off"}}) }}
+
+                    <div class="mb-3">
+                        {{ form_row(formulario.titulo, {attr:{'class': 'form-control', autocomplete: 'off'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(formulario.descripcion, {attr:{'class': 'form-control', autocomplete: 'off'}}) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+
+                                {{ form_row(formulario.imagen) }}
+
+                                <figure class="figure">
+                                    <img src="{{asset('uploads/images/'~podcast.imagen)}}" class="figure-img img-fluid rounded" alt="...">
+                                    <figcaption class="figure-caption">Foto Actual.</figcaption>
+                                </figure>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                
+                                {{ form_row(formulario.audio) }}
+
+                                <div class="d-flex justify-content-center" style="padding-top: 60px">
+                                    <figure class="figure">
+                                        <div class="px-6">
+                                            <div class="align-self-center ">
+                                                <audio  class="" controls >
+                                                    <source src="{{asset('uploads/audios/'~podcast.audio)}}" type="audio/mpeg" />
+                                                </audio>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <figcaption class="figure-caption">Audio Actual.</figcaption>
+                                    </figure>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-4 mb-4">
+                            <div class="form-outline">
+                                {{ form_row(formulario.crear, {label: 'Editar Podcast', attr:{'class': 'btn btn-primary btn-block mb-4'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-outline">
+                                <a class="btn btn-danger btn-block mb-4" href="{{ path('eliminar_podcast', {id_podcast: podcast.id, id: usuario.id}) }}" > Eliminar </a>
+                            </div>
+                        </div>
+                    </div>
+                {{ form_end(formulario)}}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+{% endblock %}

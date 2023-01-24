@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}
+
+{% block body %}
+<style>
+
+    body{
+        background-color:  #eee;
+    }
+
+    th, td{
+        text-align: center;
+        border-right: 1px solid #dee2e6;
+    }
+
+</style>
+
+    <h3>{{app.user.nombre}}</h3>
+    <div>
+        <a type="button" class="btn- btn-secondary" href="logout" > logout </a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Rol</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Email</th>
+                <th scope="col">Titulo Podcast</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Audio</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+
+            </tr>
+        </thead>
+        <tbody >
+            {% for usuario in usuarios %}
+                <tr>
+                    <th scope="row">{{usuario.roles[0]}}</th>
+                    <td>
+                        {% if usuario.imagen is empty %}
+                        {% else %} 
+                            <img width="20%" src="{{asset('uploads/images/'~usuario.imagen)}}" />
+                        {% endif %}
+                    </td>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellidos}}</td> 
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.titulo}}</td>
+                    <td>{{usuario.fechaSubida | date('d-m-Y H:i a', 'Europe/Madrid')}}</td>
+                    <td>
+                        {% if usuario.imagen is empty %}
+                        {% else %} 
+                            <audio controls>
+                                <source src="{{asset('uploads/audios/'~usuario.audio)}}" type="audio/mpeg" />
+                            </audio>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if usuario.id is empty %}
+                            <a id="{{usuario.usuario}}" type="button" class="btn btn-primary" href="{{ path('editar_todo', {id: usuario.usuario, idp: 0}) }}">Editar</a>
+                        {% else %}
+                            <a id="{{usuario.id}}" type="button" class="btn btn-primary" href="{{ path('editar_todo', {id: usuario.usuario, idp: usuario.id}) }}">Editar</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if usuario.id is empty %}
+                            <a id="U{{usuario.usuario}}" data-toggle="modal" class="btn btn-danger" data-target="#modalU{{usuario.usuario}}" type="button">Eliminar</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalU{{usuario.usuario}}" tabindex="-1" role="dialog" aria-labelledby="modalLabelU{{usuario.usuario}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabelU{{usuario.usuario}}">Estás Seguro?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Estás seguro que quieres eliminar a <span id="nombreModal"> {{usuario.nombre}}</span> este usuario. Si es Si pulsa Eliminar.
+                                    </div>
+                                    <div id="botones" class="modal-footer">
+                                        <button id="cerrar" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <a id="eliminar" href="deleteUsuario/{{usuario.usuario}}" class="btn btn-primary">Eliminar Usuario</a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a id="P{{usuario.id}}" data-toggle="modal" class="btn btn-danger" data-target="#modalP{{usuario.id}}" type="button">Eliminar</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalP{{usuario.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabelP{{usuario.id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabelP{{usuario.id}}">Estás Seguro?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Estás seguro que quieres eliminar a <span id="nombreModal"> {{usuario.nombre}}</span> este usuario. Si es Si pulsa Eliminar.
+                                    </div>
+                                    <div id="botones" class="modal-footer">
+                                        <button id="cerrar" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <a type="button" id="eliminarP" href="delete/{{usuario.id}}" class="btn btn-primary">Eliminar Podcast</a>
+                                        <a type="button" id="eliminar" href="deleteTodo/{{usuario.usuario}}" class="btn btn-primary">Eliminar Todo el Usuario</a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                                    
+            {% endfor %}
+            
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(usuarios) }}
+    </div>
+
+
+
+{% endblock %}

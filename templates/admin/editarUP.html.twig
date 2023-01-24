@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}
+ 
+{% block body %}
+<style>
+
+    body{
+        background-color:  #eee;
+    }
+
+</style>
+
+<a href="{{path('dashboard')}}" type="button" class="btn- btn-primary"> Volver </a>
+
+<section class="text-center">
+    <div class="card-body py-5 px-md-5">
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-5" >Datos Usuario</h2>
+                {{ form_start(formulariou, {attr: {autocomplete: "off"}}) }}
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                {{ form_row(formulariou.nombre, {attr:{'class': 'form-control', autocomplete: 'off',placeholder: 'fernando'}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                {{ form_row(formulariou.apellidos, {attr:{'class': 'form-control', autocomplete: 'off',placeholder: 'rodriguez de tembleque'}})}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        {{ form_row(formulariou.email, {attr:{'class': 'form-control', autocomplete: 'off',placeholder: 'example@gmail.com'}})}}
+                        <span id="emailError" style="color: red"></span>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        {{ form_row(formulariou.password, {attr:{'class': 'form-control', value: usuario.password, autocomplete: 'off',placeholder: '**********'}})}}
+                        <span id="textoValidacion" style="color: red"></span>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label for="passwordR">Repetir Password</label>
+                        <input type="password" name="passwordR" class="form-control" id="passwordR" placeholder="*******">
+                        <span id="textoError" style="color: red"></span>
+                    </div>
+
+
+                    {{ form_row(formulariou.submit, {label: 'Editar Usuario', attr:{'class': 'btn btn-primary btn-block mb-4'}})}}
+
+                {{ form_end(formulariou) }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="text-center">
+    <div class="card-body py-5 px-md-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-5" >Datos Podcast</h2>
+                {{ form_start(formulariop, {attr: {autocomplete: "off"}}) }}
+
+                    <div class="mb-3">
+                        {{ form_row(formulariop.titulo, {attr:{'class': 'form-control', autocomplete: 'off'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(formulariop.descripcion, {attr:{'class': 'form-control', autocomplete: 'off'}}) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+
+                                {{ form_row(formulariop.imagen) }}
+
+                                {% if podcast.imagen is null %}
+                                {% else %}
+                                    <figure class="figure">
+                                        <img src="{{asset('uploads/images/'~podcast.imagen)}}" class="figure-img img-fluid rounded" alt="...">
+                                        <figcaption class="figure-caption">Foto Actual.</figcaption>
+                                    </figure>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                
+                                {{ form_row(formulariop.audio) }}
+                                {% if podcast.audio is empty %}
+                                {% else %}
+                                    <div class="d-flex justify-content-center" style="padding-top: 60px">
+                                        <figure class="figure">
+                                            <div class="px-6">
+                                                <div class="align-self-center ">
+                                                    <audio  class="" controls >
+                                                        <source src="{{asset('uploads/audios/'~podcast.audio)}}" type="audio/mpeg" />
+                                                    </audio>
+                                                </div>
+                                                <br>
+                                            </div>
+                                            <figcaption class="figure-caption">Audio Actual.</figcaption>
+                                        </figure>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {% if podcast.id is empty %}
+                             {{ form_row(formulariop.crear, {label: 'Crear Podcast', attr:{'class': 'btn btn-primary btn-block mb-4'}}) }}
+                        {% else %}
+                            {{ form_row(formulariop.crear, {label: 'Editar Podcast', attr:{'class': 'btn btn-primary btn-block mb-4'}}) }}
+                        {% endif %}
+                    </div>
+
+                {{ form_end(formulariop)}}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

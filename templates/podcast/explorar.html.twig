@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Explorar{% endblock %}
+
+{% block body %}
+<style>
+
+
+    body {
+  background-color:  #eee;
+    }
+
+    span{
+      font-size: 14px;
+      color: grey;
+    }
+
+    html,
+body,
+.view {
+  height: 100%;
+}
+
+#mobile-box {
+  width: 360px;
+}
+
+.card {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.card .view {
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card h5 a {
+  color: #0d47a1;
+}
+
+.card h5 a:hover {
+  color: #072f6b;
+}
+
+#pButton {
+  float: left;
+}
+
+#timeline {
+  width: 90%;
+  height: 2px;
+  margin-top: 20px;
+  margin-left: 10px;
+  float: left;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#pButton {
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+#playhead {
+  width: 8px;
+  height: 8px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  margin-top: -3px;
+  background: black;
+  cursor: pointer;
+}
+    /**audio */
+
+    .title {
+    
+        margin-bottom: 50px;
+        text-transform: uppercase;
+    }
+
+    .card-block {
+        font-size: 1em;
+        position: relative;
+        margin: 0;
+        padding: 1em;
+        border: none;
+        border-top: 1px solid rgba(34, 36, 38, .1);
+        box-shadow: none;
+        
+    }
+    .card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 5;
+        border: none;
+        border-radius: .28571429rem;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        margin-top:20px;
+    }
+    
+
+    .btn {
+    margin-top: auto;
+    }
+
+    .example-wrapper { margin: 1em auto; max-width: 1200px; width: 95%; font: 18px/1.5 sans-serif; margin-top: 85px; box-sizing: border-box}
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    
+</style>
+
+{{ parent() }}
+
+<div class="example-wrapper">
+
+  {% for podcast in podcasts %}
+
+      <div id="{{podcast.id}}" class="card my-4 mb-5">
+        <div class="row ">
+            <div class="col-sm-4 ">
+                <img class="d-block w-100 h-100" src="{{asset('uploads/images/'~podcast.imagen)}}" />
+            </div>
+            <div class="col-sm-7 px-3">
+                <div class="card-block px-6">
+                    <h4 class="card-title">{{podcast.titulo}}</h4>
+                </div>
+                <div class="card-block px-6">
+                    <p style="text-align: left; font-size: 0.85rem;"> {{podcast.descripcion}} </p>
+                </div>
+                <div class="px-6">
+                    <div class="align-self-center ">
+                      <audio  class="embed-responsive-item  w-100" controls >
+                          <source src="{{asset('uploads/audios/'~podcast.audio)}}" type="audio/mpeg" />
+                      </audio>
+                  </div>
+                  <br>
+                </div>
+                
+                    <div class="row ">
+                      <div class="card-block px-6 space-between">
+                        <span class="font-weight-bold"> DE {{podcast.nombre}} </span>
+                      
+                        <span> {{podcast.fechaSubida | date('d-m-Y H:i a', 'Europe/Madrid')}} </span>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+  {% endfor %}
+  <div class="navigation">
+      {{ knp_pagination_render(podcasts) }}
+  </div>
+</div>
+{% endblock %}
